@@ -8,4 +8,10 @@ export default defineConfig({
       vue(),
       tailwindcss()
   ],
+    build: {
+        outDir: 'dist',
+        rollupOptions: {
+            input: './index.html'
+        }
+    }
 })

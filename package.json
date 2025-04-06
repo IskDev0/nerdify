@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:icons": "node src/resize-icons.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.3",
+    "sharp": "^0.34.0",
     "tailwindcss": "^4.1.3",
     "vue": "^3.5.13"
   },
