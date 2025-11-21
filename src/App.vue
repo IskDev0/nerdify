@@ -95,57 +95,89 @@ async function copyToClipboard() {
       </div>
     </Transition>
 
-    <form class="bg-neutral-900 text-neutral-100 shadow-2xl rounded-2xl p-8 mx-8 max-w-3xl w-full">
-      <h1 class="text-2xl font-bold text-center mb-8">🤓 Nerdify 🤓</h1>
+    <form class="bg-neutral-900 text-neutral-100 shadow-2xl rounded-2xl p-4 sm:p-6 md:p-8 mx-2 sm:mx-4 max-w-2xl w-full">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 text-amber-500">🤓 Nerdify 🤓</h1>
 
-      <textarea
-          v-model="message"
-          placeholder="Type your message..."
-          class="bg-neutral-800 border-none resize-none w-full text-lg py-4 px-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200"/>
+      <div class="mb-5 sm:mb-6">
+        <label for="message-input" class="block text-xs sm:text-sm font-medium mb-2 text-neutral-300">
+          Your Message
+        </label>
+        <textarea
+            v-model="message"
+            id="message-input"
+            placeholder="Type your message here..."
+            rows="4"
+            aria-label="Message to nerdify"
+            class="bg-neutral-800 border-2 border-neutral-700 hover:border-amber-500 focus:border-amber-500 resize-none w-full text-base sm:text-lg py-3 sm:py-4 px-4 sm:px-6 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 min-h-[100px] sm:min-h-[120px]"/>
+      </div>
 
-      <div class="flex flex-col gap-4 my-4">
-        <div class="inline-flex items-center">
-          <label class="flex items-center cursor-pointer relative" for="check-2">
-            <input
-                v-model="addEmoji"
-                type="checkbox"
-                checked
-                class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-amber-500 checked:border-slate-800"
-                id="check-2"/>
-            <span
-                class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-     <Check/>
-    </span>
-          </label>
-          <label class="cursor-pointer ml-2" for="check-2">
-            Add 🤓
-          </label>
-        </div>
-        <div class="flex items-center gap-4">
-          <select
-              v-model.number="selectedPrefix"
-              id="prefix-select"
-              class="w-full bg-neutral-800 border-2 border-amber-500 rounded-lg px-4 py-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200">
-            <option v-for="(variant, index) in wellActuallyVariants" :key="index" :value="index">
-              {{ variant.label }}
-            </option>
-          </select>
-          <button
-              @click="randomizePrefixClick"
-              type="button"
-              class="text-2xl hover:scale-110 transition-transform duration-200 cursor-pointer bg-neutral-800 p-1 rounded-md"
-              title="Random prefix">
-            🎲
-          </button>
+      <div class="mb-5 sm:mb-6 p-3 sm:p-4 bg-neutral-800 rounded-xl">
+        <h2 class="text-xs sm:text-sm font-semibold mb-3 sm:mb-4 text-amber-500 uppercase tracking-wide">Options</h2>
+
+        <div class="flex flex-col gap-4 sm:gap-5">
+          <div class="flex items-center gap-2 sm:gap-3">
+            <label class="flex items-center cursor-pointer relative" for="emoji-checkbox">
+              <input
+                  v-model="addEmoji"
+                  type="checkbox"
+                  checked
+                  aria-label="Add nerd emoji"
+                  class="peer h-5 w-5 sm:h-6 sm:w-6 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border-2 border-neutral-600 checked:bg-amber-500 checked:border-amber-600"
+                  id="emoji-checkbox"/>
+              <span
+                  class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Check/>
+              </span>
+            </label>
+            <label class="cursor-pointer text-sm sm:text-base font-medium select-none" for="emoji-checkbox">
+              Add 🤓 emoji at the end
+            </label>
+          </div>
+
+          <div>
+            <label for="prefix-select" class="block text-xs sm:text-sm font-medium mb-2 text-neutral-300">
+              Prefix Style
+            </label>
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              <select
+                  v-model.number="selectedPrefix"
+                  id="prefix-select"
+                  aria-label="Select prefix style"
+                  class="w-full bg-neutral-700 border-2 border-neutral-600 hover:border-amber-500 focus:border-amber-500 rounded-lg px-3 sm:px-4 py-2.5 sm:py-3 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-sm sm:text-base">
+                <option v-for="(variant, index) in wellActuallyVariants" :key="index" :value="index">
+                  {{ variant.label }}
+                </option>
+              </select>
+              <button
+                  @click="randomizePrefixClick"
+                  type="button"
+                  aria-label="Randomize prefix"
+                  class="w-full sm:w-auto text-2xl sm:text-3xl hover:scale-105 sm:hover:scale-110 active:scale-95 transition-transform duration-200 cursor-pointer bg-neutral-700 hover:bg-neutral-600 px-3 sm:px-4 py-2 rounded-lg border-2 border-neutral-600 hover:border-amber-500 flex items-center justify-center gap-2"
+                  title="Random prefix">
+                <span>🎲</span>
+                <span class="text-sm sm:hidden font-medium">Random</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-between gap-2 border-2 border-amber-500 py-2 px-4 rounded-md">
-        <p>{{ message.length > 0 ? nerdifiedMessage : 'Nerdify your message' }}</p>
-        <button @click="copyToClipboard" :disabled="message.length === 0" type="button"
-                class="w-6 h-6 cursor-pointer disabled:opacity-50">
-          <Copy/>
-        </button>
+      <div class="bg-neutral-800 rounded-xl p-3 sm:p-4 border-2 border-amber-500">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+          <h2 class="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">Result</h2>
+          <button
+              @click="copyToClipboard"
+              :disabled="message.length === 0"
+              type="button"
+              aria-label="Copy to clipboard"
+              class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-700 text-neutral-900 disabled:text-neutral-500 font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed text-sm sm:text-base">
+            <Copy class="w-4 h-4 sm:w-5 sm:h-5"/>
+            <span>Copy</span>
+          </button>
+        </div>
+        <p class="text-base sm:text-lg leading-relaxed min-h-[60px] flex items-center break-words" :class="message.length === 0 ? 'text-neutral-500 italic' : 'text-neutral-100'">
+          {{ message.length > 0 ? nerdifiedMessage : 'Your nerdified message will appear here...' }}
+        </p>
       </div>
     </form>
   </main>
