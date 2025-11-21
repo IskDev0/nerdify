@@ -98,7 +98,25 @@ async function copyToClipboard() {
     <form class="bg-neutral-900 text-neutral-100 shadow-2xl rounded-2xl p-4 sm:p-6 md:p-8 mx-2 sm:mx-4 max-w-2xl w-full">
       <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 sm:mb-8 text-amber-500">🤓 Nerdify 🤓</h1>
 
-      <div class="mb-5 sm:mb-6">
+      <div class="bg-neutral-800 rounded-xl p-3 sm:p-4 border-2 border-amber-500">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+          <h2 class="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">Result</h2>
+          <button
+              @click="copyToClipboard"
+              :disabled="message.length === 0"
+              type="button"
+              aria-label="Copy to clipboard"
+              class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-700 text-neutral-900 disabled:text-neutral-500 font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed text-sm sm:text-base">
+            <Copy class="w-4 h-4 sm:w-5 sm:h-5"/>
+            <span>Copy</span>
+          </button>
+        </div>
+        <p class="text-base sm:text-lg leading-relaxed min-h-[60px] flex items-center break-words" :class="message.length === 0 ? 'text-neutral-500 italic' : 'text-neutral-100'">
+          {{ message.length > 0 ? nerdifiedMessage : 'Your nerdified message will appear here...' }}
+        </p>
+      </div>
+
+      <div class="mb-5 sm:mb-6 mt-6">
         <label for="message-input" class="block text-xs sm:text-sm font-medium mb-2 text-neutral-300">
           Your Message
         </label>
@@ -160,24 +178,6 @@ async function copyToClipboard() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="bg-neutral-800 rounded-xl p-3 sm:p-4 border-2 border-amber-500">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-          <h2 class="text-xs sm:text-sm font-semibold text-amber-500 uppercase tracking-wide">Result</h2>
-          <button
-              @click="copyToClipboard"
-              :disabled="message.length === 0"
-              type="button"
-              aria-label="Copy to clipboard"
-              class="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-700 text-neutral-900 disabled:text-neutral-500 font-medium rounded-lg transition-all duration-200 disabled:cursor-not-allowed text-sm sm:text-base">
-            <Copy class="w-4 h-4 sm:w-5 sm:h-5"/>
-            <span>Copy</span>
-          </button>
-        </div>
-        <p class="text-base sm:text-lg leading-relaxed min-h-[60px] flex items-center break-words" :class="message.length === 0 ? 'text-neutral-500 italic' : 'text-neutral-100'">
-          {{ message.length > 0 ? nerdifiedMessage : 'Your nerdified message will appear here...' }}
-        </p>
       </div>
     </form>
   </main>
