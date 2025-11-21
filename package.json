@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "description": "Transform your messages into hilarious nerdy text with random capitalization and snarky prefixes. Perfect for memes and jokes!",
+  "author": "Nerdify",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

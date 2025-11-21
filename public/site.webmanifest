@@ -1,6 +1,7 @@
 {
-  "name": "Nerdify",
+  "name": "Nerdify - Nerdy Text Generator",
   "short_name": "Nerdify",
+  "description": "Transform your messages into hilarious nerdy text with random capitalization and snarky prefixes. Perfect for memes and jokes!",
   "icons": [
     {
       "src": "/icons/pwa-192x192.png",
@@ -28,8 +29,11 @@
     }
   ],
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#be9851",
-  "description": "Nerdify text lmao"
+  "orientation": "any",
+  "background_color": "#0a0a0a",
+  "theme_color": "#f59e0b",
+  "categories": ["entertainment", "utilities"],
+  "lang": "en-US"
 }
